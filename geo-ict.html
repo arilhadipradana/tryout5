@@ -1,0 +1,466 @@
+<html>
+    <head>
+        <title>GEOICT</title>
+        <link rel="stylesheet" href="style.css" />
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    </head>
+    <body>
+        <div class="container">
+        <div class="container-navbar">
+          <ul class="ul-navbar">
+            <li class="li-navbar">
+                <a href="index.html" class="a-navbar">HOME</a>
+            </li>
+            <li class="li-navbar">
+                <a href="about.html" class="a-navbar">SDL</a>
+            </li>
+                                <li class="li-navbar">
+                <a href="quiz.html" class="a-navbar">QUIZ</a>
+            </li>   
+                                                        <li class="li-navbar">
+                <a href="kepoin.html" class="a-navbar">KEPO-IN</a>
+            </li>   
+                                     <li class="li-navbar">
+                <a href="simulasi.html" class="a-navbar">SIMULASI</a>
+            </li>
+             <li class="li-navbar">
+                <a href="geo-ict.html" class="a-navbar">GEOICT</a>
+            </li>
+            <li class="li-navbar">
+                <a href="aman.html" class="a-navbar">AMAN</a>
+            </li>
+            <li class="li-navbar">
+                <a href="contact.html" class="a-navbar">DISKUSI YUK</a>
+            </li>
+          </ul>
+        </div>
+        <div class="geoict-content-wrapper" style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #2d3748; max-width: 1100px; margin: 40px auto; padding: 0 20px;">
+
+    <section class="geoict-hero" style="text-align: center; margin-bottom: 50px;">
+        <span style="background: #e53e3e; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.8em; letter-spacing: 1px;">PUSDATIN - GEOICT</span>
+        <h1 style="color: #1a365d; font-size: 2.8em; margin: 15px 0;">Intelligence Geospasial & Komunikasi</h1>
+    </section>
+
+<div id="peta-saya" style="width: 100%; height: 500px; border: 2px solid #ccc; border-radius: 10px; overflow: hidden; margin-top: 20px;">
+    </div>
+
+<div>
+    <div class="krb-final-dashboard" style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 1140px; margin: 40px auto; padding: 0 20px; box-sizing: border-box;">
+    
+    <style>
+        .krb-final-dashboard * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .dashboard-card { background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0; padding: 35px; box-shadow: 0 10px 25px rgba(0,0,0,0.04); }
+        .dashboard-title-border { border-left: 5px solid #1e3a8a; padding-left: 15px; margin-bottom: 30px; }
+        
+        /* Simbologi Warna Konsisten Sistem Nasional */
+        :root {
+            --krb-tinggi: #dc2626;  /* Merah */
+            --krb-sedang: #ea580c;  /* Jingga */
+            --krb-rendah: #16a34a;  /* Hijau */
+            --krb-dark: #0f172a;
+        }
+
+        /* Ringkasan Widget Statistik */
+        .krb-stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 35px; }
+        .stat-item { padding: 22px; border-radius: 12px; border: 1px solid #e2e8f0; background: #f8fafc; text-align: center; position: relative; overflow: hidden; }
+        .stat-item::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: #cbd5e1; }
+        .stat-item.h-tinggi::before { background: var(--krb-tinggi); }
+        .stat-item.h-sedang::before { background: var(--krb-sedang); }
+        .stat-item.h-rendah::before { background: var(--krb-rendah); }
+        .stat-count { font-size: 2.4em; font-weight: 800; color: var(--krb-dark); line-height: 1.1; }
+        .stat-desc { font-size: 0.85em; font-weight: 700; color: #64748b; margin-top: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Tata Letak Konten Utama */
+        .krb-workspace-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 35px; }
+        @media (max-width: 850px) { .krb-workspace-grid { grid-template-columns: 1fr; } }
+        
+        /* Kontrol Sisi Kiri */
+        .select-input-group { margin-bottom: 25px; }
+        .krb-custom-select { width: 100%; padding: 14px 16px; border-radius: 10px; border: 2px solid #cbd5e1; font-size: 1em; font-weight: 600; color: #1e3a8a; background-color: #f8fafc; cursor: pointer; }
+        .krb-custom-select:focus { border-color: #1e3a8a; outline: none; box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.15); }
+        
+        .matrix-box { background: #f1f5f9; border-radius: 12px; padding: 20px; border: 1px solid #e2e8f0; }
+        .badge-flex { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+        .indeks-badge { flex: 1; min-width: 85px; text-align: center; padding: 10px 5px; border-radius: 8px; font-size: 0.75em; font-weight: 800; color: #ffffff; text-transform: uppercase; }
+        .bg-tinggi { background: var(--krb-tinggi); box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2); }
+        .bg-sedang { background: var(--krb-sedang); box-shadow: 0 2px 4px rgba(234, 88, 12, 0.2); }
+        .bg-rendah { background: var(--krb-rendah); box-shadow: 0 2px 4px rgba(22, 163, 74, 0.2); }
+
+        .tab-navigation { display: flex; gap: 10px; margin-top: 25px; }
+        .tab-trigger-btn { flex: 1; padding: 12px; border: none; border-radius: 8px; font-weight: 700; font-size: 0.85em; cursor: pointer; background: #e2e8f0; color: #475569; }
+        .tab-trigger-btn.active-tab { background: #1e3a8a; color: #ffffff; box-shadow: 0 4px 10px rgba(30, 58, 138, 0.2); }
+
+        /* Panel Deskripsi Kanan */
+        .description-viewport { background: #f8fafc; border-radius: 14px; padding: 28px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; height: 100%; }
+        .viewport-header { border-bottom: 2px dashed #cbd5e1; padding-bottom: 15px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .risk-status-pill { font-size: 0.95em; font-weight: 800; background: #ffffff; padding: 4px 12px; border-radius: 6px; border: 1px solid currentColor; text-transform: uppercase; }
+        
+        .narrative-card { display: flex; gap: 18px; background: #ffffff; padding: 20px; border-radius: 12px; border-left: 4px solid #cbd5e1; margin-top: 15px; box-shadow: 0 4px 6px rgba(15, 23, 42, 0.015); }
+        .narrative-icon { font-size: 2em; line-height: 1; user-select: none; }
+        .narrative-headline { font-weight: 800; color: #1e293b; margin: 0 0 6px 0; font-size: 1.05em; }
+        .narrative-body { margin: 0; color: #475569; font-size: 0.9em; line-height: 1.6; text-align: justify; }
+
+        /* Struktur PopUp Globals Leaflet */
+        .leaflet-popup-content-wrapper { border-radius: 10px !important; padding: 5px !important; }
+        .krb-leaflet-popup { font-family: 'Segoe UI', sans-serif; min-width: 220px; padding: 5px; }
+        .pop-title { font-size: 1.15em; font-weight: 800; color: #1e3a8a; margin-bottom: 10px; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px; }
+        .pop-field { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.88em; }
+        .pop-label { color: #64748b; font-weight: 600; }
+        .pop-val { font-weight: 700; }
+    </style>
+
+    <div class="dashboard-card">
+        
+        <div class="dashboard-title-border">
+            <h2 style="color: var(--krb-dark); margin: 0; font-size: 1.65em; font-weight: 800; letter-spacing: -0.5px;">📈 Ringkasan Eksekutif & Analisis Kajian Risiko</h2>
+            <p style="color: #64748b; margin: 6px 0 0 0; font-size: 0.95em;">Sistem Integrasi Hasil Pemetaan Deskriptif. Layer Utama Aktif: <span style="color:#1e3a8a; font-weight:700;">Kelas Risiko Multibahaya</span>.</p>
+        </div>
+
+        <div class="krb-stat-row">
+            <div class="stat-item">
+                <div class="stat-count" id="countTotal">15</div>
+                <div class="stat-desc">Total Wilayah</div>
+            </div>
+            <div class="stat-item h-tinggi">
+                <div class="stat-count" id="countTinggi" style="color: var(--krb-tinggi);">0</div>
+                <div class="stat-desc">Risiko Tinggi</div>
+            </div>
+            <div class="stat-item h-sedang">
+                <div class="stat-count" id="countSedang" style="color: var(--krb-sedang);">0</div>
+                <div class="stat-desc">Risiko Sedang</div>
+            </div>
+            <div class="stat-item h-rendah">
+                <div class="stat-count" id="countRendah" style="color: var(--krb-rendah);">0</div>
+                <div class="stat-desc">Risiko Rendah</div>
+            </div>
+        </div>
+
+        <div class="krb-workspace-grid">
+            
+            <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 20px;">
+                <div>
+                    <div class="select-input-group">
+                        <label style="font-weight: 700; color: #334155; display: block; margin-bottom: 8px; font-size: 0.9em;">Pilih Cakupan Administratif:</label>
+                        <select id="krbDatasetSelector" class="krb-custom-select" onchange="switchTargetRegion(this.value)">
+                            <option value="Lampung Selatan">Kab. Lampung Selatan</option>
+                            <option value="Lampung Tengah">Kab. Lampung Tengah</option>
+                            <option value="Lampung Utara">Kab. Lampung Utara</option>
+                            <option value="Lampung Barat">Kab. Lampung Barat</option>
+                            <option value="Tulang Bawang">Kab. Tulang Bawang</option>
+                            <option value="Tanggamus">Kab. Tanggamus</option>
+                            <option value="Lampung Timur">Kab. Lampung Timur</option>
+                            <option value="Way Kanan">Kab. Way Kanan</option>
+                            <option value="Pesawaran">Kab. Pesawaran</option>
+                            <option value="Pringsewu">Kab. Pringsewu</option>
+                            <option value="Mesuji">Kab. Mesuji</option>
+                            <option value="Tulang Bawang Barat">Kab. Tulang Bawang Barat</option>
+                            <option value="Pesisir Barat">Kab. Pesisir Barat</option>
+                            <option value="Kota Bandar Lampung">Kota Bandar Lampung</option>
+                            <option value="Kota Metro">Kota Metro</option>
+                        </select>
+                    </div>
+
+                    <div class="matrix-box">
+                        <span style="font-size: 0.75em; font-weight: 800; color: #475569; text-transform: uppercase; letter-spacing: 0.8px; display:block;">Simbologi Matriks Penyusun Risiko</span>
+                        <div class="badge-flex">
+                            <div class="indeks-badge" id="badgeContainerBahaya">BAHAYA<br><span id="valBahaya" style="font-size:1.15em; font-weight:900;">-</span></div>
+                            <div class="indeks-badge" id="badgeContainerKerentanan">KERENTANAN<br><span id="valKerentanan" style="font-size:1.15em; font-weight:900;">-</span></div>
+                            <div class="indeks-badge" id="badgeContainerKapasitas">KAPASITAS<br><span id="valKapasitas" style="font-size:1.15em; font-weight:900;">-</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label style="font-weight: 700; color: #334155; display: block; margin-bottom: 6px; font-size: 0.9em;">Perspektif Ketangguhan Komunitas:</label>
+                    <div class="tab-navigation">
+                        <button id="tabInklusif" class="tab-trigger-btn active-tab" onclick="changeActivePerspective('inklusif')">No One Left Behind</button>
+                        <button id="tabHarmoni" class="tab-trigger-btn" onclick="changeActivePerspective('harmoni')">Harmoni Semesta</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="description-viewport">
+                <div class="viewport-header">
+                    <h4 style="margin: 0; color: #1e3a8a; font-size: 1.2em; font-weight: 800;" id="regionOutputTitle">Memuat Wilayah...</h4>
+                    <div>
+                        <span style="font-size:0.8em; font-weight:700; color:#64748b; margin-right:5px; text-transform:uppercase;">Risiko Multibahaya:</span>
+                        <span id="pillRisikoLevel" class="risk-status-pill">-</span>
+                    </div>
+                </div>
+
+                <div class="narrative-card" id="cardNarrative1">
+                    <div class="narrative-icon" id="iconNarrative1">✨</div>
+                    <div>
+                        <h5 class="narrative-headline" id="titleNarrative1">Aksi Prioritas Intervensi</h5>
+                        <p class="narrative-body" id="textNarrative1">Menghubungkan visualisasi data spasial...</p>
+                    </div>
+                </div>
+
+                <div class="narrative-card" id="cardNarrative2" style="border-left-color: var(--krb-rendah);">
+                    <div class="narrative-icon" id="iconNarrative2">✨</div>
+                    <div>
+                        <h5 class="narrative-headline" id="titleNarrative2">Dampak Penguatan Struktur</h5>
+                        <p class="narrative-body" id="textNarrative2">Menghubungkan visualisasi data spasial...</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Data Riil Berdasarkan Hasil Dokumen Kajian Risiko Bencana Lampung Final
+        const krbCoreRepository = {
+            "Lampung Selatan": { bahaya: "TINGGI", kerentanan: "TINGGI", kapasitas: "SEDANG", risiko: "TINGGI" },
+            "Lampung Tengah": { bahaya: "TINGGI", kerentanan: "TINGGI", kapasitas: "SEDANG", risiko: "TINGGI" },
+            "Lampung Utara": { bahaya: "TINGGI", kerentanan: "TINGGI", kapasitas: "RENDAH", risiko: "TINGGI" },
+            "Lampung Barat": { bahaya: "TINGGI", kerentanan: "TINGGI", kapasitas: "SEDANG", risiko: "TINGGI" },
+            "Tulang Bawang": { bahaya: "TINGGI", kerentanan: "TINGGI", kapasitas: "SEDANG", risiko: "TINGGI" },
+            "Tanggamus": { bahaya: "TINGGI", kerentanan: "TINGGI", kapasitas: "SEDANG", risiko: "TINGGI" },
+            "Lampung Timur": { bahaya: "TINGGI", kerentanan: "TINGGI", kapasitas: "SEDANG", risiko: "TINGGI" },
+            "Way Kanan": { bahaya: "TINGGI", kerentanan: "TINGGI", kapasitas: "SEDANG", risiko: "TINGGI" },
+            "Pesawaran": { bahaya: "TINGGI", kerentanan: "TINGGI", kapasitas: "SEDANG", risiko: "TINGGI" },
+            "Pringsewu": { bahaya: "TINGGI", kerentanan: "TINGGI", kapasitas: "SEDANG", risiko: "TINGGI" },
+            "Mesuji": { bahaya: "TINGGI", kerentanan: "SEDANG", kapasitas: "RENDAH", risiko: "TINGGI" },
+            "Tulang Bawang Barat": { bahaya: "SEDANG", kerentanan: "SEDANG", kapasitas: "SEDANG", risiko: "SEDANG" },
+            "Pesisir Barat": { bahaya: "TINGGI", kerentanan: "TINGGI", kapasitas: "RENDAH", risiko: "TINGGI" },
+            "Kota Bandar Lampung": { bahaya: "TINGGI", kerentanan: "TINGGI", kapasitas: "SEDANG", risiko: "TINGGI" },
+            "Kota Metro": { bahaya: "TINGGI", kerentanan: "TINGGI", kapasitas: "SEDANG", risiko: "TINGGI" }
+        };
+
+        let currentActivePerspective = 'inklusif';
+        let currentTargetRegionName = 'Lampung Selatan';
+
+        // 1. ENGINE FITUR STATISTIK GEO-KOMPUTASI OTOMATIS
+        function compileRepositoryStats() {
+            let highCount = 0, mediumCount = 0, lowCount = 0;
+            const regionKeys = Object.keys(krbCoreRepository);
+            
+            regionKeys.forEach(name => {
+                const targetRisiko = krbCoreRepository[name].risiko;
+                if (targetRisiko === "TINGGI") highCount++;
+                else if (targetRisiko === "SEDANG") mediumCount++;
+                else if (targetRisiko === "RENDAH") lowCount++;
+            });
+
+            document.getElementById('countTotal').innerText = regionKeys.length;
+            document.getElementById('countTinggi').innerText = highCount;
+            document.getElementById('countSedang').innerText = mediumCount;
+            document.getElementById('countRendah').innerText = lowCount;
+        }
+
+        function assignSimbologiBadge(containerId, textId, value) {
+            const txt = document.getElementById(textId);
+            const box = document.getElementById(containerId);
+            txt.innerText = value;
+            box.className = "indeks-badge " + 
+                (value === "TINGGI" ? "bg-tinggi" : value === "SEDANG" ? "bg-sedang" : "bg-rendah");
+        }
+
+        function changeActivePerspective(perspectiveName) {
+            currentActivePerspective = perspectiveName;
+            document.getElementById('tabInklusif').classList.toggle('active-tab', perspectiveName === 'inklusif');
+            document.getElementById('tabHarmoni').classList.toggle('active-tab', perspectiveName === 'harmoni');
+            renderFinalDashboardView(currentTargetRegionName);
+        }
+
+        // 2. RENDERING PANEL DESKRIPSI DINAMIS & KONSISTEN
+        function renderFinalDashboardView(regionName) {
+            currentTargetRegionName = regionName;
+            const record = krbCoreRepository[regionName];
+            if(!record) return;
+
+            // Sinkronisasi komponen form dropdown
+            document.getElementById('krbDatasetSelector').value = regionName;
+
+            // Render komponen simbol matriks penyusun
+            assignSimbologiBadge('badgeContainerBahaya', 'valBahaya', record.bahaya);
+            assignSimbologiBadge('badgeContainerKerentanan', 'valKerentanan', record.kerentanan);
+            assignSimbologiBadge('badgeContainerKapasitas', 'valKapasitas', record.kapasitas);
+            
+            // Render lencana status utama kelas risiko multibahaya
+            const pill = document.getElementById('pillRisikoLevel');
+            pill.innerText = record.risiko;
+            
+            const targetColor = record.risiko === "TINGGI" ? "var(--krb-tinggi)" : record.risiko === "SEDANG" ? "var(--krb-sedang)" : "var(--krb-rendah)";
+            pill.style.color = targetColor;
+
+            // Pemisahan Skenario Berdasarkan Sudut Pandang Terpilih
+            if (currentActivePerspective === 'inklusif') {
+                document.getElementById('regionOutputTitle').innerText = `♿ Pemenuhan Hak Inklusif: ${regionName}`;
+                document.getElementById('cardNarrative1').style.borderLeftColor = "var(--krb-sedang)";
+                document.getElementById('iconNarrative1').innerText = "🚨";
+                document.getElementById('titleNarrative1').innerText = "Aksi Kelompok Rentan & Disabilitas";
+                
+                document.getElementById('cardNarrative2').style.borderLeftColor = "#2563eb";
+                document.getElementById('iconNarrative2').innerText = "🤝";
+                document.getElementById('titleNarrative2').innerText = "Rantai Perlindungan Sosial Mandiri";
+
+                if (record.kapasitas === "RENDAH") {
+                    document.getElementById('textNarrative1').innerText = "Kapasitas daerah terpantau minim dalam mengadopsi kebutuhan inklusif. Infrastruktur evakuasi darurat wajib dimodifikasi menjadi bidang miring (ramp terstandarisasi). Kelompok disabilitas netra dan rungu wajib dipetakan khusus dalam EWS berbasis taktil dan lampu strobo.";
+                    document.getElementById('textNarrative2').innerText = "Pemberdayaan terfokus pada pengaktifan sistem 'Buddy System' tingkat rukun warga: satu pemuda bugar bertanggung jawab penuh mengevakuasi satu warga rentan/lansia terdekat dari tempat tinggalnya demi asas no one left behind.";
+                } else {
+                    document.getElementById('textNarrative1').innerText = "Memaksimalkan kapasitas wilayah yang mumpuni, integrasikan simulasi tanggap bencana berkala ke dalam aktivitas Sekolah Luar Biasa (SLB) dan jejaring inklusi sosial desa setempat secara aktif.";
+                    document.getElementById('textNarrative2').innerText = "Gunakan posko pengungsian terpadu yang ramah bagi ibu menyusui (ruang laktasi steril), fasilitas bilik sanitasi ramah gender, serta pemenuhan kebutuhan logistik gizi spesifik.";
+                }
+            } else {
+                document.getElementById('regionOutputTitle').innerText = `🌿 Ekosistem Selaras Semesta: ${regionName}`;
+                document.getElementById('cardNarrative1').style.borderLeftColor = "#0d9488";
+                document.getElementById('iconNarrative1').innerText = "⛰️";
+                document.getElementById('titleNarrative1').innerText = "Simbiosis Manusia dengan Alam";
+                
+                document.getElementById('cardNarrative2').style.borderLeftColor = "var(--krb-sedang)";
+                document.getElementById('iconNarrative2').innerText = "🫂";
+                document.getElementById('titleNarrative2').innerText = "Harmoni Sosial Lintas Komunitas";
+
+                if (record.bahaya === "TINGGI") {
+                    document.getElementById('textNarrative1').innerText = "Kerentanan indeks bahaya tinggi memanggil aksi pemulihan lansekap ekologi. Larang alih fungsi vegetasi lereng bukit! Lakukan rekayasa vegetatif penanaman akar wangi (vetiver) penahan longsor atau pelestarian mangrove pelindung abrasi pantai.";
+                    document.getElementById('textNarrative2').innerText = "Membendung risiko bencana hidrometeorologi dengan menegakkan kesepakatan bersama perlindungan Daerah Aliran Sungai (DAS) bebas sampah. Hubungan sosial antar-warga direkatkan lewat komitmen gotong royong membersihkan hulu sungai secara kontinu.";
+                } else {
+                    document.getElementById('textNarrative1').innerText = "Ekosistem berada pada parameter aman dan seimbang. Rawat stabilitas ekologi ini melalui optimalisasi penanaman sabuk hijau kota (RTH) atau pengembangan kawasan ekowisata berbasis lingkungan tangguh.";
+                    document.getElementById('textNarrative2').innerText = "Tingkatkan ketahanan wilayah dengan memanfaatkan ruang terbuka hijau multifungsi sebagai wadah berkumpulnya warga sekaligus berfungsi sebagai titik kumpul (Assembly Point) utama yang asri.";
+                }
+            }
+        }
+
+        // 3. JEMBATAN INTERAKTIF SINKRONISASI KLIK PETA WEBGIS LEAFLET
+        // Eksekusi fungsi global ini dari berkas pemetaan utama Anda: window.syncDashboardFromLeaflet(regionName);
+        window.syncDashboardFromLeaflet = function(leafletPropertiesName) {
+            const selector = document.getElementById('krbDatasetSelector');
+            for (let i = 0; i < selector.options.length; i++) {
+                if (selector.options[i].value.toLowerCase() === leafletPropertiesName.toLowerCase().trim()) {
+                    renderFinalDashboardView(selector.options[i].value);
+                    break;
+                }
+            }
+        };
+
+        // Trigger inisialisasi awal eksekusi sistem saat halaman siap
+        document.addEventListener("DOMContentLoaded", function() {
+            compileRepositoryStats();
+            renderFinalDashboardView("Lampung Selatan");
+        });
+
+
+        // =====================================================================
+        // ARCHITECTURE MAP CONTROLLER (BLUEPRINT INTEGRASI SCRIPT LEAFLET ANDA)
+        // =====================================================================
+        /*
+        // A. Fungsi Pewarnaan Konsisten Layer Utama (Kelas Risiko Multibahaya)
+        function setKrbSimbologiLayer(feature) {
+            let areaName = feature.properties.WADMKK; // sesuaikan key atribut poligon GeoJSON Anda
+            let currentRecord = krbCoreRepository[areaName] || { risiko: "SEDANG" };
+            
+            let colorHex = "#ea580c"; // Default Jingga (Sedang)
+            if (currentRecord.risiko === "TINGGI") colorHex = "#dc2626"; // Merah
+            else if (currentRecord.risiko === "RENDAH") colorHex = "#16a34a"; // Hijau
+
+            return {
+                fillColor: colorHex,
+                weight: 1.5,
+                opacity: 1,
+                color: '#ffffff',
+                dashArray: '3',
+                fillOpacity: 0.75
+            };
+        }
+
+        // B. Fungsi Pembuat Popup Leaflet Informatif Komprehensif
+        function buildInformatifPopupHTML(feature) {
+            let areaName = feature.properties.WADMKK;
+            let currentRecord = krbCoreRepository[areaName] || { bahaya: "-", kerentanan: "-", kapasitas: "-", risiko: "-" };
+            
+            return `
+                <div class="krb-leaflet-popup">
+                    <div class="pop-title">📍 ${areaName}</div>
+                    <div class="pop-field"><span class="pop-label">Indeks Bahaya:</span><span class="pop-val" style="color:#dc2626">${currentRecord.bahaya}</span></div>
+                    <div class="pop-field"><span class="pop-label">Kerentanan:</span><span class="pop-val" style="color:#ea580c">${currentRecord.kerentanan}</span></div>
+                    <div class="pop-field"><span class="pop-label">Kapasitas Wilayah:</span><span class="pop-val" style="color:#16a34a">${currentRecord.kapasitas}</span></div>
+                    <div class="pop-field" style="margin-top:8px; padding-top:6px; border-top:1px dashed #cbd5e1; font-weight:bold;">
+                        <span class="pop-label" style="color:#0f172a">Risiko Multibahaya:</span>
+                        <span class="pop-val" style="color:${currentRecord.risiko === 'TINGGI' ? '#dc2626' : '#ea580c'}">${currentRecord.risiko}</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // C. Fungsi Hubungan Events di dalam deklarasi L.geoJSON onEachFeature Anda
+        function onEachFeature(feature, layer) {
+            // Pasangkan popup informatif nasional
+            layer.bindPopup(buildInformatifPopupHTML(feature));
+            
+            layer.on({
+                click: function(e) {
+                    // Pemicu sinkronisasi data ke panel deskripsi di bawah peta saat poligon diklik
+                    if(window.syncDashboardFromLeaflet) {
+                        window.syncDashboardFromLeaflet(feature.properties.WADMKK);
+                    }
+                }
+            });
+        }
+        */
+    </script>
+</div>
+</div>
+
+<section style="background: #f7fafc; padding: 25px; border-radius: 10px; border: 1px dashed #cbd5e0; text-align: center; margin-top: 20px;">
+        <h3 style="margin-top: 0; color: #1a365d;">Keamanan Data & Integritas Informasi</h3>
+        <p style="margin-bottom: 0;">Pusdatin GEOICT menggunakan protokol enkripsi standar industri untuk menjamin akurasi data kebencanaan nasional yang transparan dan dapat dipertanggungjawabkan.</p>
+    </section>
+
+</div>
+        <div class="container-footer">
+            <h1 class="h1-footer">Thank you for visiting. I hope you find this useful.</h1>   
+        </div>
+        </div>
+
+        <script>
+
+ // Membuat peta
+    var map = L.map('peta-saya').setView([-5.30380, 105.49200], 8);
+
+    // Basemap OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Memanggil file GeoJSON
+    fetch('peta_krb.geojson')
+        .then(response => response.json())
+        .then(data => {
+
+            var krbLayer = L.geoJSON(data, {
+                style: {
+                    color: 'red',
+                    weight: 2,
+                    fillColor: 'orange',
+                    fillOpacity: 0.5
+                },
+
+                onEachFeature: function(feature, layer) {
+
+                    let popupContent = "";
+
+                    for (let key in feature.properties) {
+                        popupContent += "<b>" + key + "</b>: " +
+                                        feature.properties[key] + "<br>";
+                    }
+
+                    layer.bindPopup(popupContent);
+                }
+            });
+
+            krbLayer.addTo(map);
+
+            // Zoom otomatis ke area data
+            map.fitBounds(krbLayer.getBounds());
+        })
+        .catch(error => console.log(error));
+        </script>
+
+
+    </body>
+</html>
