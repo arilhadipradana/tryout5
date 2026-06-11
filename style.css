@@ -1,0 +1,671 @@
+*,
+html {
+    margin: 0;
+    padding: 0;
+}
+
+.container {}
+
+body {
+    background-color: #f3f4f4;
+}
+
+.container-navbar {
+    background-color: #ad0404;
+    width: 100%;
+    height:15vh;
+}
+
+.ul-navbar {
+   background-color: #444444;
+   display: flex;
+   height: 100px;
+   justify-content: center;
+   align-items: center;
+   list-style-type: none;
+}
+
+.li-navbar {
+    padding: 20px;
+    margin: 5px;
+    color: white;
+    list-style-type: none;
+}
+
+.li-navbar:hover {
+    background-color: #ad0404;
+    border-radius: 5px;
+}
+
+.a-navbar {
+    font-size:large;
+    color: white;
+    text-decoration: none;
+    font-size: large;
+}
+
+.container-content {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+}
+
+.a-content {
+    width: 98vw;
+    height: 71vh;
+    background-color: #e3e5e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: medium;
+    border-radius: 10px;
+}
+
+.img-content {
+    width: 30%;
+    height: 30%;
+}
+
+/* --- Pengaturan Wadah Utama Home --- */
+.home-section {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 65vh; /* Membuat elemen berada di tengah secara vertikal */
+}
+
+/* Kotak Utama (Background Abu-abu) */
+.home-box {
+    background-color: #e5e5e5;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 1100px;
+    padding: 60px 50px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* --- Bagian Kiri (Teks Hero) --- */
+.hero-text {
+    flex: 1; /* Mengambil 50% ruang */
+}
+
+/* Label kecil di atas judul */
+.badge {
+    background-color: #333;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hero-text h1 {
+    font-size: 42px;
+    color: #222;
+    margin: 15px 0 5px 0;
+    font-family: serif; /* Menyesuaikan gaya font header-mu */
+}
+
+.hero-text .subtitle {
+    font-size: 20px;
+    color: #b00000; /* Aksen merah sesuai tema footer */
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: normal;
+}
+
+.hero-text .description {
+    font-size: 16px;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 35px;
+}
+
+/* --- Pengaturan Tombol Aksi --- */
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #b00000;
+    color: white;
+    border: 2px solid #b00000;
+}
+
+.btn-primary:hover {
+    background-color: #8a0000;
+    border-color: #8a0000;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #333;
+    border: 2px solid #333;
+}
+
+.btn-secondary:hover {
+    background-color: #333;
+    color: white;
+}
+
+/* --- Bagian Kanan (Gambar/Ilustrasi) --- */
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.img-preview {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    /* Sedikit efek miring agar terlihat seperti 3D dashboard (Opsional) */
+    transform: perspective(800px) rotateY(-5deg); 
+    transition: transform 0.5s ease;
+}
+
+.img-preview:hover {
+    transform: perspective(800px) rotateY(0deg); /* Lurus saat disorot */
+}
+
+/* ==========================================
+   GAYA UNTUK EDUKASI LITERASI (ATAS)
+=========================================== */
+.sdl-section {
+    padding: 40px 20px 20px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.sdl-box {
+    background-color: #e5e5e5; 
+    border-radius: 12px;
+    width: 100%;
+    max-width: 1100px;
+    padding: 50px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.sdl-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.sdl-header h2 {
+    font-size: 32px;
+    color: #222;
+    margin-bottom: 10px;
+    font-family: serif;
+}
+
+.divider-center {
+    border: none;
+    height: 3px;
+    background-color: #b00000;
+    width: 80px;
+    margin: 0 auto 20px auto; 
+}
+
+.sdl-description {
+    font-size: 16px;
+    color: #444;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.literacy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.literacy-card {
+    background-color: #ffffff;
+    padding: 35px 25px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border-top: 5px solid #b00000;
+    transition: transform 0.3s ease;
+}
+
+.literacy-card:hover {
+    transform: translateY(-8px);
+}
+
+.card-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+/* ==========================================
+   TRANSISI (TEKS PENGHUBUNG)
+=========================================== */
+.transition-container {
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* ==========================================
+   GAYA UNTUK SIMULATOR RISIKO (BAWAH)
+=========================================== */
+.simulator-section {
+    padding: 20px 20px 50px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.simulator-box {
+    background-color: #ffffff;
+    border: 2px solid #e5e5e5;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 1100px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.simulator-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.simulator-header h2 {
+    color: #b00000;
+    font-family: serif;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.simulator-content {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.parameter-form {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.param-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 15px;
+}
+
+.param-group select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+}
+
+.result-dashboard {
+    flex: 0.8;
+    background-color: #f4f4f4;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    border-left: 5px solid #333;
+}
+
+.skor-angka {
+    font-size: 60px;
+    font-weight: bold;
+    color: #222;
+    margin: 15px 0;
+}
+
+.status-risiko {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 6px;
+    color: white;
+}
+
+.rumus-text {
+    font-size: 13px;
+    color: #666;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+/* ==========================================
+   RESPONSIVITAS (UNTUK LAYAR HP)
+=========================================== */
+@media (max-width: 768px) {
+    .simulator-content {
+        flex-direction: column;
+    }
+    
+    .sdl-box, .simulator-box {
+        padding: 25px;
+    }
+    
+    .result-dashboard {
+        width: 100%;
+        border-left: none;
+        border-top: 5px solid #333;
+    }
+}
+
+/* --- Wadah Kuis Utama --- */
+.quiz-section {
+    padding: 50px 20px;
+    display: flex;
+    justify-content: center;
+    background-color: #f9f9f9;
+}
+
+.quiz-container {
+    background-color: #ffffff;
+    border-top: 5px solid #b00000;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 900px;
+    padding: 40px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.quiz-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.quiz-header h2 {
+    color: #222;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+/* --- Gaya Soal & Pilihan Ganda --- */
+.question-block {
+    margin-bottom: 35px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.question-text {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+.options-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.option-label {
+    display: flex;
+    align-items: flex-start;
+    padding: 12px 15px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.option-label:hover {
+    background-color: #ffebeb;
+    border-color: #b00000;
+}
+
+.option-label input[type="radio"] {
+    margin-top: 4px;
+    margin-right: 12px;
+    accent-color: #b00000; /* Warna centang merah */
+}
+
+/* --- Tombol Kuis --- */
+.quiz-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#btn-submit-quiz, .btn-retry {
+    background-color: #b00000;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#btn-submit-quiz:hover, .btn-retry:hover {
+    background-color: #8a0000;
+}
+
+/* --- Area Hasil & Pembahasan --- */
+.hidden {
+    display: none;
+}
+
+.quiz-result {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px solid #222;
+}
+
+.score-board {
+    text-align: center;
+    font-size: 24px;
+    color: #222;
+    margin-bottom: 30px;
+}
+
+.pembahasan-item {
+    background-color: #e5e5e5;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 5px solid #b00000;
+}
+
+.pembahasan-item h4 {
+    margin-top: 0;
+    color: #b00000;
+}
+
+.pembahasan-item p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* Kotak Simpulan */
+.simpulan-box {
+    background-color: #fff3f3;
+    border: 1px solid #ffcccc;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.simpulan-box h4 {
+    color: #b00000;
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.simpulan-box p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #444;
+}
+
+
+
+/* --- Pengaturan Wadah Utama --- */
+.contact-section {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    min-height: 60vh; /* Memastikan tingginya proporsional dengan layar */
+}
+
+/* Kotak Abu-abu (Meniru desain screenshot kamu) */
+.contact-box {
+    background-color: #e5e5e5; /* Warna abu-abu elegan */
+    border-radius: 12px;
+    width: 100%;
+    max-width: 1000px;
+    padding: 50px;
+    display: flex;
+    gap: 50px; /* Jarak antara teks kiri dan form kanan */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Bayangan halus */
+}
+
+/* --- Bagian Kiri (Teks Info) --- */
+.contact-text {
+    flex: 1; /* Mengambil setengah bagian kotak */
+    color: #333;
+}
+
+.contact-text h2 {
+    margin-top: 0;
+    font-size: 28px;
+    color: #222;
+}
+
+.tagline {
+    font-size: 18px;
+    font-style: italic;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.divider {
+    border: none;
+    height: 3px;
+    background-color: #b00000; /* Warna merah sesuai footer kamu */
+    width: 60px;
+    margin: 20px 0;
+}
+
+.description {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.contact-details p {
+    font-size: 15px;
+    margin: 8px 0;
+    font-weight: bold;
+    color: #444;
+}
+
+/* --- Bagian Kanan (Formulir) --- */
+.contact-form-container {
+    flex: 1; /* Mengambil setengah bagian lainnya */
+    background-color: #ffffff; /* Latar putih agar form menonjol dari kotak abu */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.input-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.input-group input,
+.input-group textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+/* Efek saat form diklik (Fokus) */
+.input-group input:focus,
+.input-group textarea:focus {
+    outline: none;
+    border-color: #b00000; /* Warna merah fokus */
+}
+
+/* Tombol Submit */
+.btn-submit {
+    background-color: #b00000; /* Warna merah senada dengan footer */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #8a0000; /* Warna merah lebih gelap saat disorot */
+}
+
+.container-footer {
+    height: 10vh;
+    background-color: #ad0404;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.h1-footer{
+    font-size: 20px;
+    font-weight: normal;
+    color: white;
+}
